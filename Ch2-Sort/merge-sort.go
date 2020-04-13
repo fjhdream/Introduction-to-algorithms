@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
+	//"fmt"
 	"math"
-	"math/rand"
-	"time"
+	//"math/rand"
+	//"time"
 )
 
 func merge(array []int, p, q, r int) {
@@ -34,17 +34,25 @@ func mergeSort(array []int, p, r int) {
 		go mergeSort(array, p, q)
 		go mergeSort(array, q, r)
 		go merge(array, p, q, r)
-	} else {
-		return
 	}
 
 }
 
-func main() {
+func mergeSortWithoutGo(array []int, p, r int) {
+	q := int(math.Floor(float64((p + r) / 2)))
+	if p < r && q < r && p < q {
+		mergeSortWithoutGo(array, p, q)
+		mergeSortWithoutGo(array, q, r)
+		merge(array, p, q, r)
+	}
 
-	array := rand.Perm(1000000)
-	timeStart := time.Now()
-	mergeSort(array, 0, len(array))
-	timeRunnig := time.Since(timeStart)
-	fmt.Printf("time cost: %d ns \n", timeRunnig)
 }
+
+// func main() {
+
+// 	array := rand.Perm(1000000)
+// 	timeStart := time.Now()
+// 	mergeSort(array, 0, len(array))
+// 	timeRunnig := time.Since(timeStart)
+// 	fmt.Printf("time cost: %d ns \n", timeRunnig)
+// }
