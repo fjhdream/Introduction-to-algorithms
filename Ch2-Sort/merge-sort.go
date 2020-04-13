@@ -41,8 +41,9 @@ func mergeSort(array []int, p, r int) {
 }
 
 func main() {
+
+	array := rand.Perm(1000000)
 	timeStart := time.Now()
-	array := rand.Perm(1000)
 	mergeSort(array, 0, len(array))
 	timeRunnig := time.Since(timeStart)
 	fmt.Printf("time cost: %d ns \n", timeRunnig)
